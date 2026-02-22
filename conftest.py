@@ -13,9 +13,9 @@ from selenium.webdriver.chrome.options import Options
 @pytest.fixture(scope="function")
 def Launch_browser():
     chrome_options = Options()
-    chrome_options.add_argument("--headless=new")  # REQUIRED for Jenkins
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--disable-notifications")
+    chrome_options.add_argument("--disable-infobars")
     chrome_options.add_argument("--window-size=1920,1080")
 
     service = Service(ChromeDriverManager().install())
@@ -28,7 +28,7 @@ def Launch_browser():
     browser.implicitly_wait(30)
     browser.get(config.get("basic info","url"))
     browser.maximize_window()
-    browser.find_element(By.LINK_TEXT,"Login").click()
+    wait.until(EC.visibility_of_element_located((By.XPATH,"//a[normalize-space()='Login']"))).click()
     time.sleep(10)
 
     wait.until(EC.visibility_of_element_located((By.XPATH,'//input[@placeholder="Enter your active Email ID / Username"]'))).send_keys(config.get("basic info","username"))
