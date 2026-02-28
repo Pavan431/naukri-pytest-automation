@@ -21,7 +21,7 @@ def Launch_browser():
     service = Service(ChromeDriverManager().install())
 
     browser = webdriver.Chrome(service=service,options=chrome_options)
-
+    browser = webdriver.Chrome()
     config= ConfigParser()
     config.read("config.ini")
     wait = WebDriverWait(browser, 20)
@@ -30,7 +30,6 @@ def Launch_browser():
     browser.maximize_window()
     wait.until(EC.visibility_of_element_located((By.XPATH,"//a[normalize-space()='Login']"))).click()
     time.sleep(10)
-
     wait.until(EC.visibility_of_element_located((By.XPATH,'//input[@placeholder="Enter your active Email ID / Username"]'))).send_keys(config.get("basic info","username"))
     wait.until(EC.visibility_of_element_located((By.XPATH,'//input[@placeholder="Enter your password"]'))).send_keys(config.get("basic info","password"))
     wait.until(EC.visibility_of_element_located((By.XPATH,'//button[@type="submit"]'))).click()
@@ -41,3 +40,4 @@ def Launch_browser():
     wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='nI-gNb-drawer__bars']"))).click()
     browser.find_element(By.LINK_TEXT,"Logout").click()
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT,"Login")))
+    browser.quit()
