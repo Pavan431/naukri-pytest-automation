@@ -28,7 +28,7 @@ def Launch_browser():
     service = Service(ChromeDriverManager().install())
 
     browser = webdriver.Chrome(service=service,options=chrome_options)
-    browser = webdriver.Chrome()
+    #browser = webdriver.Chrome()
     config= ConfigParser()
     config.read("config.ini")
     wait = WebDriverWait(browser, 20)
