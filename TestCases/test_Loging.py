@@ -17,9 +17,12 @@ def test_Login(Launch_browser):
     wait.until(EC.presence_of_element_located((By.XPATH,"(//span[text()='Resume headline'])[1]"))).click()
     time.sleep(2)
     wait.until(EC.visibility_of_element_located((By.XPATH,"//span[text()='Resume headline']/following-sibling::span[text()='editOneTheme']"))).click()
-    headline_box= wait.until(EC.visibility_of_element_located((By.XPATH,"//textarea[@id='resumeHeadlineTxt']")))
-    headline_text= headline_box.text
+    headline_box = wait.until(
+    EC.visibility_of_element_located((By.XPATH,"//textarea[@id='resumeHeadlineTxt']")))
+
+    headline_text = headline_box.get_attribute("value")
     print(headline_text)
+
     headline_box.click()
     headline_box.send_keys(Keys.CONTROL,"a")
     headline_box.send_keys(Keys.DELETE)
