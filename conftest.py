@@ -18,16 +18,26 @@ def Launch_browser():
     #chrome_options.add_argument("--disable-infobars")
     #chrome_options.add_argument("--window-size=1920,1080")
 
+    chrome_options = Options()
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--disable-notifications")
-    chrome_options.add_argument("--disable-infobars")
+    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     chrome_options.add_argument("--window-size=1920,1080")
+
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    chrome_options.add_experimental_option("useAutomationExtension", False)
+
+    chrome_options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    )
 
     service = Service(ChromeDriverManager().install())
 
     browser = webdriver.Chrome(service=service,options=chrome_options)
+    browser.execute_script(
+        "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+    )
     #browser = webdriver.Chrome()
     config= ConfigParser()
     config.read("config.ini")
