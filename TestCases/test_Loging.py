@@ -26,7 +26,7 @@ def test_Login(Launch_browser):
     headline_box.send_keys(headline_text)
     wait.until(EC.visibility_of_element_located((By.XPATH,"//button[text()='Save']"))).click()
     #time.sleep(5)
-    wait.until(EC.presence_of_element_located((By.XPATH,"//span[normalize-space()='Profile updated successfully']")))
+    wait.until(EC.presence_of_element_located((By.XPATH,"//span[contains(text(),'Profile updated')]")))
     ActionChains(driver).send_keys(Keys.ESCAPE).perform()
 
 def scroll_until_element(driver, xpath, timeout=25):
