@@ -25,7 +25,7 @@ def test_Login(Launch_browser):
     headline_box.send_keys(Keys.DELETE)
     headline_box.send_keys(headline_text)
     wait.until(EC.visibility_of_element_located((By.XPATH,"//button[text()='Save']"))).click()
-    #time.sleep(5)
+    time.sleep(3)
     wait.until(EC.presence_of_element_located((By.XPATH,"//span[contains(text(),'Profile updated')]")))
     ActionChains(driver).send_keys(Keys.ESCAPE).perform()
 
