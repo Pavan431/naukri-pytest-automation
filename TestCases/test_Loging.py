@@ -26,7 +26,13 @@ def test_Login(Launch_browser):
     headline_box.send_keys(headline_text)
     wait.until(EC.visibility_of_element_located((By.XPATH,"//button[text()='Save']"))).click()
     time.sleep(3)
-    wait.until(EC.presence_of_element_located((By.XPATH,"//*[contains(text(),'Profile updated successfully')]")))
+    wait.until(EC.text_to_be_present_in_element((By.TAG_NAME,"body"),"Profile updated successfully"))
+    try:
+        driver.find_element(By.XPATH,"//span[@class='crossIcon']").click()
+    except:
+        pass
+    
+    #wait.until(EC.presence_of_element_located((By.XPATH,"//*[contains(text(),'Profile updated successfully')]")))
     ActionChains(driver).send_keys(Keys.ESCAPE).perform()
 
 def scroll_until_element(driver, xpath, timeout=25):
