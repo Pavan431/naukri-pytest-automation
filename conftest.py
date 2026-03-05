@@ -33,9 +33,14 @@ def Launch_browser():
     config.read("config.ini")
     wait = WebDriverWait(browser, 20)
     browser.implicitly_wait(30)
+    
     browser.get(config.get("basic info","url"))
+    time.sleep(5)
+    print(browser.current_url)
+    print(browser.title)
+    
     browser.maximize_window()
-    wait.until(EC.visibility_of_element_located((By.XPATH,"//a[normalize-space()='Login']"))).click()
+    wait.until(EC.presence_of_element_located((By.XPATH,"//a[normalize-space()='Login']"))).click()
     time.sleep(10)
     wait.until(EC.visibility_of_element_located((By.XPATH,'//input[@placeholder="Enter your active Email ID / Username"]'))).send_keys(config.get("basic info","username"))
     wait.until(EC.visibility_of_element_located((By.XPATH,'//input[@placeholder="Enter your password"]'))).send_keys(config.get("basic info","password"))
